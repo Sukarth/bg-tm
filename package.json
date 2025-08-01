@@ -1,0 +1,61 @@
+{
+  "name": "bgtm",
+  "version": "1.0.0",
+  "description": "Background Task Manager - A cross-platform CLI tool for managing background processes",
+  "main": "src/index.js",
+  "bin": {
+    "bgtm": "./bin/bgtm"
+  },
+  "scripts": {
+    "start": "node bin/bgtm",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/ test/ bin/bgtm",
+    "lint:fix": "eslint src/ test/ bin/bgtm --fix",
+    "prepare": "npm run test && npm run lint"
+  },
+  "keywords": [
+    "background",
+    "process",
+    "manager",
+    "cli",
+    "task",
+    "daemon",
+    "cross-platform"
+  ],
+  "author": "Sukarth Acharya",
+  "license": "MIT",
+  "homepage": "https://github.com/Sukarth/bgtm#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sukarth/bgtm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sukarth/bgtm/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^14.0.0",
+    "cross-spawn": "^7.0.6",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-jest": "^28.14.0",
+    "jest": "^29.7.0",
+    "supertest": "^7.1.4"
+  }
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+/**
+ * BGTM - Background Task Manager
+ * A cross-platform CLI tool for managing background processes
+ *
+ * @author Sukarth Acharya
+ * @version 1.0.0
+ */
+
+// Handle uncaught exceptions gracefully
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error.message)
+  process.exit(1)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason)
+  process.exit(1)
+})
+
+// Initialize and run CLI
+async function main() {
+  try {
+    const { CLI } = require('../src/cli')
+    const cli = new CLI()
+    await cli.run(process.argv)
+  } catch (error) {
+    console.error('Error:', error.message)
+    process.exit(1)
+  }
+}
+
+main()
