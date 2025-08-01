@@ -1,6 +1,6 @@
 # BG-TM - Background Task Manager
 
-[![npm version](https://badge.fury.io/js/bg-tm.svg)](https://badge.fury.io/js/bg-tm)
+[![npm version](https://badge.fury.io/js/@sukarth%2Fbg-tm.svg)](https://badge.fury.io/js/@sukarth%2Fbg-tm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js CI](https://github.com/Sukarth/bg-tm/workflows/Node.js%20CI/badge.svg)](https://github.com/Sukarth/bg-tm/actions)
 
@@ -19,16 +19,27 @@ A powerful, cross-platform CLI tool for managing background processes. Run any c
 
 ## Installation
 
-Install globally via npm:
+**Install globally via npm:**
 
 ```bash
-npm install -g bg-tm
+npm install -g @sukarth/bg-tm
 ```
 
-Or run directly with npx:
+Then use bg-tm normally:
+```bash
+bg-tm --help
+```
+
+**Or run directly with npx:**
 
 ```bash
-npx bg-tm --help
+npx @sukarth/bg-tm --help
+```
+
+And include '@sukarth' when running commands, for example:
+```bash
+npx @sukarth/bg-tm run "python -m http.server 8000" --name webserver
+npx @sukarth/bg-tm list
 ```
 
 ## Quick Start

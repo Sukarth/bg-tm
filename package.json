@@ -1,5 +1,5 @@
 {
-  "name": "bg-tm",
+  "name": "@sukarth/bg-tm",
   "version": "1.0.0",
   "description": "Background Task Manager - A cross-platform CLI tool for managing background processes",
   "main": "src/index.js",
