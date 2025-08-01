@@ -14,12 +14,24 @@ const { Storage } = require('./storage')
 class ProcessManager {
   constructor() {
     this.storage = new Storage()
+    this._initialized = false
+  }
+
+  /**
+   * Ensure storage is initialized
+   */
+  async _ensureInitialized() {
+    if (!this._initialized) {
+      await this.storage.init()
+      this._initialized = true
+    }
   }
 
   /**
      * Start a new background process
      */
   async startProcess(command, options = {}) {
+    await this._ensureInitialized()
     const processId = uuidv4()
     const processName = options.name || `process-${Date.now()}`
     const workingDirectory = options.workingDirectory || process.cwd()
@@ -105,6 +117,7 @@ class ProcessManager {
      * Stop a background process
      */
   async stopProcess(nameOrId, force = false) {
+    await this._ensureInitialized()
     const processData = await this.getProcess(nameOrId)
 
     if (processData.status !== 'running') {
@@ -162,6 +175,7 @@ class ProcessManager {
      * List all processes
      */
   async listProcesses(includeAll = false) {
+    await this._ensureInitialized()
     const processes = await this.storage.getAllProcesses()
 
     if (!includeAll) {
@@ -175,6 +189,7 @@ class ProcessManager {
      * Get a specific process by name or ID
      */
   async getProcess(nameOrId) {
+    await this._ensureInitialized()
     const processData = await this.storage.getProcess(nameOrId)
 
     if (!processData) {
@@ -232,6 +247,7 @@ class ProcessManager {
      * Get logs for a process
      */
   async getLogs(nameOrId, options = {}) {
+    await this._ensureInitialized()
     const processData = await this.getProcess(nameOrId)
 
     if (!processData.logFile) {
@@ -267,6 +283,7 @@ class ProcessManager {
      * Restart a process
      */
   async restartProcess(nameOrId) {
+    await this._ensureInitialized()
     const oldProcess = await this.getProcess(nameOrId)
 
     // Stop the process if it's running
@@ -295,6 +312,7 @@ class ProcessManager {
      * Update process status
      */
   async updateProcessStatus(processId, status, metadata = {}) {
+    await this._ensureInitialized()
     await this.storage.updateProcess(processId, {
       status,
       lastUpdated: new Date().toISOString(),
@@ -306,6 +324,7 @@ class ProcessManager {
      * Clean up stopped processes and old log files
      */
   async cleanup() {
+    await this._ensureInitialized()
     const processes = await this.storage.getAllProcesses()
     const stoppedProcesses = processes.filter(p => p.status !== 'running')
 

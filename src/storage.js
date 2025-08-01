@@ -12,7 +12,6 @@ class Storage {
   constructor() {
     this.dataDir = this.getDataDir()
     this.processesFile = path.join(this.dataDir, 'processes.json')
-    this.init()
   }
 
   /**
