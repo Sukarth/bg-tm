@@ -2,7 +2,7 @@
 
 ## Reporting Security Vulnerabilities
 
-We take the security of BGTM seriously. If you discover a security vulnerability, please report it to us privately.
+We take the security of BG-TM seriously. If you discover a security vulnerability, please report it to us privately.
 
 ### How to Report
 
@@ -33,19 +33,19 @@ Include the following information:
 
 ### Process Execution
 
-BGTM executes user-provided commands as background processes. Users should be aware that:
+BG-TM executes user-provided commands as background processes. Users should be aware that:
 
-- Commands are executed with the same privileges as the user running BGTM
+- Commands are executed with the same privileges as the user running BG-TM
 - Input validation is performed, but users should be cautious with command injection
 - Log files may contain sensitive information from command output
 
 ### Data Storage
 
-BGTM stores process metadata in the user's home directory:
+BG-TM stores process metadata in the user's home directory:
 
 - Process information is stored in JSON format
 - Log files contain command output
-- No passwords or sensitive credentials are stored by BGTM itself
+- No passwords or sensitive credentials are stored by BG-TM itself
 
 ### Autostart Security
 
@@ -59,11 +59,11 @@ These integrations use standard platform mechanisms and run with user privileges
 
 ## Best Practices for Users
 
-1. **Command Validation**: Always validate commands before running them with BGTM
+1. **Command Validation**: Always validate commands before running them with BG-TM
 2. **Log Security**: Be aware that log files may contain sensitive output
 3. **Autostart Review**: Regularly review autostart processes
-4. **Access Control**: Ensure proper file permissions on the BGTM data directory
-5. **Regular Updates**: Keep BGTM updated to the latest version
+4. **Access Control**: Ensure proper file permissions on the BG-TM data directory
+5. **Regular Updates**: Keep BG-TM updated to the latest version
 
 ## Supported Versions
 

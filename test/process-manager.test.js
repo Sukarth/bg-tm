@@ -18,7 +18,7 @@ describe('ProcessManager', () => {
 
   beforeEach(async() => {
     tempDir = await global.testUtils.createTempDir()
-    process.env.BGTM_DATA_DIR = tempDir
+    process.env.BG_TM_DATA_DIR = tempDir
 
     // Setup mock child process
     mockChildProcess = {

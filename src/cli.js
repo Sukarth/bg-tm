@@ -20,7 +20,7 @@ class CLI {
 
   setupCommands() {
     this.program
-      .name('bgtm')
+      .name('bg-tm')
       .description('Background Task Manager - A cross-platform CLI tool for managing background processes')
       .version(version, '-v, --version', 'Display version information')
       .helpOption('-h, --help', 'Display help for command')

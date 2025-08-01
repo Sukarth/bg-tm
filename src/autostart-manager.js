@@ -46,7 +46,7 @@ class AutoStartManager {
      * Windows autostart implementation using Task Scheduler
      */
   async addWindowsAutoStart(processData) {
-    const taskName = `BGTM_${processData.name}_${processData.id}`
+    const taskName = `BG-TM_${processData.name}_${processData.id}`
     const bgtmPath = process.execPath
     const args = [
       'run',
@@ -95,8 +95,8 @@ class AutoStartManager {
 <Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
   <RegistrationInfo>
     <Date>${new Date().toISOString()}</Date>
-    <Author>BGTM</Author>
-    <Description>BGTM autostart task for ${this.escapeXml(processData.name)}</Description>
+    <Author>BG-TM</Author>
+    <Description>BG-TM autostart task for ${this.escapeXml(processData.name)}</Description>
   </RegistrationInfo>
   <Triggers>
     <LogonTrigger>
@@ -143,7 +143,7 @@ class AutoStartManager {
      */
   async addMacAutoStart(processData) {
     const launchAgentDir = path.join(os.homedir(), 'Library', 'LaunchAgents')
-    const plistName = `com.bgtm.${processData.name}.${processData.id}.plist`
+    const plistName = `com.bg-tm.${processData.name}.${processData.id}.plist`
     const plistPath = path.join(launchAgentDir, plistName)
 
     // Ensure LaunchAgents directory exists
@@ -167,7 +167,7 @@ class AutoStartManager {
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.bgtm.${processData.name}.${processData.id}</string>
+    <string>com.bg-tm.${processData.name}.${processData.id}</string>
     <key>ProgramArguments</key>
     <array>
         ${programArgs.map(arg => `        <string>${this.escapeXml(arg)}</string>`).join('\n')}
@@ -211,7 +211,7 @@ class AutoStartManager {
 
   async addLinuxSystemdAutoStart(processData) {
     const userSystemdDir = path.join(os.homedir(), '.config', 'systemd', 'user')
-    const serviceName = `bgtm-${processData.name}-${processData.id}.service`
+    const serviceName = `bg-tm-${processData.name}-${processData.id}.service`
     const servicePath = path.join(userSystemdDir, serviceName)
 
     // Ensure systemd user directory exists
@@ -221,7 +221,7 @@ class AutoStartManager {
     const execStart = `${bgtmPath} run "${processData.command}" --name "${processData.name}"`
 
     const serviceContent = `[Unit]
-Description=BGTM Background Process: ${processData.name}
+Description=BG-TM Background Process: ${processData.name}
 After=graphical-session.target
 
 [Service]
@@ -249,7 +249,7 @@ WantedBy=default.target`
 
   async addLinuxXdgAutoStart(processData) {
     const autostartDir = path.join(os.homedir(), '.config', 'autostart')
-    const desktopFileName = `bgtm-${processData.name}-${processData.id}.desktop`
+    const desktopFileName = `bg-tm-${processData.name}-${processData.id}.desktop`
     const desktopPath = path.join(autostartDir, desktopFileName)
 
     // Ensure autostart directory exists
@@ -260,8 +260,8 @@ WantedBy=default.target`
 
     const desktopContent = `[Desktop Entry]
 Type=Application
-Name=BGTM: ${processData.name}
-Comment=BGTM Background Process
+Name=BG-TM: ${processData.name}
+Comment=BG-TM Background Process
 Exec=${execCommand}
 Path=${processData.workingDirectory || os.homedir()}
 Terminal=false
@@ -284,7 +284,7 @@ X-GNOME-Autostart-enabled=true`
      * Remove Windows autostart
      */
   async removeWindowsAutoStart(processData) {
-    const taskName = `BGTM_${processData.name}_${processData.id}`
+    const taskName = `BG-TM_${processData.name}_${processData.id}`
 
     try {
       await this.runCommand('schtasks', ['/Delete', '/TN', taskName, '/F'])
@@ -297,7 +297,7 @@ X-GNOME-Autostart-enabled=true`
      * Remove macOS autostart
      */
   async removeMacAutoStart(processData) {
-    const plistName = `com.bgtm.${processData.name}.${processData.id}.plist`
+    const plistName = `com.bg-tm.${processData.name}.${processData.id}.plist`
     const plistPath = path.join(os.homedir(), 'Library', 'LaunchAgents', plistName)
 
     try {
@@ -321,7 +321,7 @@ X-GNOME-Autostart-enabled=true`
   }
 
   async removeLinuxSystemdAutoStart(processData) {
-    const serviceName = `bgtm-${processData.name}-${processData.id}.service`
+    const serviceName = `bg-tm-${processData.name}-${processData.id}.service`
     const servicePath = path.join(os.homedir(), '.config', 'systemd', 'user', serviceName)
 
     try {
@@ -334,7 +334,7 @@ X-GNOME-Autostart-enabled=true`
   }
 
   async removeLinuxXdgAutoStart(processData) {
-    const desktopFileName = `bgtm-${processData.name}-${processData.id}.desktop`
+    const desktopFileName = `bg-tm-${processData.name}-${processData.id}.desktop`
     const desktopPath = path.join(os.homedir(), '.config', 'autostart', desktopFileName)
 
     try {
@@ -345,7 +345,7 @@ X-GNOME-Autostart-enabled=true`
   }
 
   /**
-     * List all autostart entries created by BGTM
+     * List all autostart entries created by BG-TM
      */
   async listAutoStartEntries() {
     switch (this.platform) {
@@ -362,7 +362,7 @@ X-GNOME-Autostart-enabled=true`
     try {
       const output = await this.runCommand('schtasks', ['/Query', '/FO', 'CSV'])
       const lines = output.split('\n')
-      const bgtmTasks = lines.filter(line => line.includes('BGTM_'))
+      const bgtmTasks = lines.filter(line => line.includes('BG-TM_'))
 
       return bgtmTasks.map(line => {
         const parts = line.split(',')
@@ -381,7 +381,7 @@ X-GNOME-Autostart-enabled=true`
     try {
       const launchAgentDir = path.join(os.homedir(), 'Library', 'LaunchAgents')
       const files = await fs.readdir(launchAgentDir)
-      const bgtmPLists = files.filter(file => file.startsWith('com.bgtm.') && file.endsWith('.plist'))
+      const bgtmPLists = files.filter(file => file.startsWith('com.bg-tm.') && file.endsWith('.plist'))
 
       return bgtmPLists.map(file => ({
         name: file,
@@ -400,7 +400,7 @@ X-GNOME-Autostart-enabled=true`
     try {
       const systemdDir = path.join(os.homedir(), '.config', 'systemd', 'user')
       const files = await fs.readdir(systemdDir)
-      const bgtmServices = files.filter(file => file.startsWith('bgtm-') && file.endsWith('.service'))
+      const bgtmServices = files.filter(file => file.startsWith('bg-tm-') && file.endsWith('.service'))
 
       entries.push(...bgtmServices.map(file => ({
         name: file,
@@ -415,7 +415,7 @@ X-GNOME-Autostart-enabled=true`
     try {
       const autostartDir = path.join(os.homedir(), '.config', 'autostart')
       const files = await fs.readdir(autostartDir)
-      const bgtmDesktop = files.filter(file => file.startsWith('bgtm-') && file.endsWith('.desktop'))
+      const bgtmDesktop = files.filter(file => file.startsWith('bg-tm-') && file.endsWith('.desktop'))
 
       entries.push(...bgtmDesktop.map(file => ({
         name: file,

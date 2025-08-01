@@ -74,13 +74,13 @@ describe('AutoStartManager', () => {
       const result = await autoStartManager.addToAutoStart(mockProcess)
 
       expect(result).toMatchObject({
-        taskName: 'BGTM_test-process_test-id-123',
+        taskName: 'BG-TM_test-process_test-id-123',
         method: 'task-scheduler'
       })
 
       expect(spawn).toHaveBeenCalledWith('schtasks', [
         '/Create',
-        '/TN', 'BGTM_test-process_test-id-123',
+        '/TN', 'BG-TM_test-process_test-id-123',
         '/XML', expect.stringContaining('.xml'),
         '/F'
       ], expect.any(Object))
@@ -101,20 +101,20 @@ describe('AutoStartManager', () => {
 
       expect(spawn).toHaveBeenCalledWith('schtasks', [
         '/Delete',
-        '/TN', 'BGTM_test-process_test-id-123',
+        '/TN', 'BG-TM_test-process_test-id-123',
         '/F'
       ], expect.any(Object))
     })
 
     test('should create valid Windows task XML', () => {
-      const taskName = 'BGTM_test_123'
+      const taskName = 'BG-TM_test_123'
       const bgtmPath = '/usr/bin/node'
       const args = ['run', '"echo test"', '--name', 'test']
 
       const xml = autoStartManager.createWindowsTaskXml(taskName, bgtmPath, args, mockProcess)
 
       expect(xml).toContain('<Task version="1.2"')
-      expect(xml).toContain('<Description>BGTM autostart task for test-process</Description>')
+      expect(xml).toContain('<Description>BG-TM autostart task for test-process</Description>')
       expect(xml).toContain('<Command>/usr/bin/node</Command>')
       expect(xml).toContain('<Arguments>run "echo test" --name test</Arguments>')
     })
@@ -138,8 +138,8 @@ describe('AutoStartManager', () => {
 
     test('should list Windows autostart entries', async() => {
       const mockOutput = `"TaskName","Next Run Time","Status"
-"BGTM_test1_123","N/A","Ready"
-"BGTM_test2_456","N/A","Running"
+"BG-TM_test1_123","N/A","Ready"
+"BG-TM_test2_456","N/A","Running"
 "Other Task","N/A","Ready"`
 
       jest.spyOn(autoStartManager, 'runCommand').mockResolvedValue(mockOutput)
@@ -148,7 +148,7 @@ describe('AutoStartManager', () => {
 
       expect(entries).toHaveLength(2)
       expect(entries[0]).toMatchObject({
-        name: 'BGTM_test1_123',
+        name: 'BG-TM_test1_123',
         status: 'Ready',
         method: 'task-scheduler'
       })
@@ -178,13 +178,13 @@ describe('AutoStartManager', () => {
       const result = await autoStartManager.addToAutoStart(mockProcess)
 
       expect(result).toMatchObject({
-        plistName: 'com.bgtm.test-process.test-id-123.plist',
+        plistName: 'com.bg-tm.test-process.test-id-123.plist',
         method: 'launch-agent'
       })
 
       expect(spawn).toHaveBeenCalledWith('launchctl', [
         'load',
-        expect.stringContaining('com.bgtm.test-process.test-id-123.plist')
+        expect.stringContaining('com.bg-tm.test-process.test-id-123.plist')
       ], expect.any(Object))
     })
 
@@ -204,14 +204,14 @@ describe('AutoStartManager', () => {
 
       expect(spawn).toHaveBeenCalledWith('launchctl', [
         'unload',
-        expect.stringContaining('com.bgtm.test-process.test-id-123.plist')
+        expect.stringContaining('com.bg-tm.test-process.test-id-123.plist')
       ], expect.any(Object))
     })
 
     test('should list macOS autostart entries', async() => {
       jest.spyOn(fs, 'readdir').mockResolvedValue([
-        'com.bgtm.test1.123.plist',
-        'com.bgtm.test2.456.plist',
+        'com.bg-tm.test1.123.plist',
+        'com.bg-tm.test2.456.plist',
         'com.other.app.plist'
       ])
 
@@ -219,7 +219,7 @@ describe('AutoStartManager', () => {
 
       expect(entries).toHaveLength(2)
       expect(entries[0]).toMatchObject({
-        name: 'com.bgtm.test1.123.plist',
+        name: 'com.bg-tm.test1.123.plist',
         method: 'launch-agent'
       })
     })
@@ -248,7 +248,7 @@ describe('AutoStartManager', () => {
       const result = await autoStartManager.addLinuxSystemdAutoStart(mockProcess)
 
       expect(result).toMatchObject({
-        serviceName: 'bgtm-test-process-test-id-123.service',
+        serviceName: 'bg-tm-test-process-test-id-123.service',
         method: 'systemd'
       })
 
@@ -256,7 +256,7 @@ describe('AutoStartManager', () => {
         '--user', 'daemon-reload'
       ], expect.any(Object))
       expect(spawn).toHaveBeenCalledWith('systemctl', [
-        '--user', 'enable', 'bgtm-test-process-test-id-123.service'
+        '--user', 'enable', 'bg-tm-test-process-test-id-123.service'
       ], expect.any(Object))
     })
 
@@ -272,7 +272,7 @@ describe('AutoStartManager', () => {
       const result = await autoStartManager.addToAutoStart(mockProcess)
 
       expect(result).toMatchObject({
-        desktopFileName: 'bgtm-test-process-test-id-123.desktop',
+        desktopFileName: 'bg-tm-test-process-test-id-123.desktop',
         method: 'xdg-autostart'
       })
     })
@@ -292,7 +292,7 @@ describe('AutoStartManager', () => {
       await autoStartManager.removeLinuxSystemdAutoStart(mockProcess)
 
       expect(spawn).toHaveBeenCalledWith('systemctl', [
-        '--user', 'disable', 'bgtm-test-process-test-id-123.service'
+        '--user', 'disable', 'bg-tm-test-process-test-id-123.service'
       ], expect.any(Object))
     })
 
@@ -300,12 +300,12 @@ describe('AutoStartManager', () => {
       // Mock systemd directory
       jest.spyOn(fs, 'readdir')
         .mockResolvedValueOnce([
-          'bgtm-test1-123.service',
-          'bgtm-test2-456.service',
+          'bg-tm-test1-123.service',
+          'bg-tm-test2-456.service',
           'other.service'
         ])
         .mockResolvedValueOnce([
-          'bgtm-test3-789.desktop',
+          'bg-tm-test3-789.desktop',
           'other.desktop'
         ])
 
@@ -477,7 +477,7 @@ describe('AutoStartManager', () => {
       const result = await autoStartManager.addWindowsAutoStart(processWithWorkingDir)
 
       expect(result).toMatchObject({
-        taskName: 'BGTM_test-process_test-id-123',
+        taskName: 'BG-TM_test-process_test-id-123',
         method: 'task-scheduler'
       })
     })

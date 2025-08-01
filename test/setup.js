@@ -11,13 +11,13 @@ const os = require('os')
 process.env.NODE_ENV = 'test'
 
 // Create temporary test data directory
-const testDataDir = path.join(os.tmpdir(), 'bgtm-test-' + Date.now())
-process.env.BGTM_DATA_DIR = testDataDir
+const testDataDir = path.join(os.tmpdir(), 'bg-tm-test-' + Date.now())
+process.env.BG_TM_DATA_DIR = testDataDir
 
 // Global test utilities
 global.testUtils = {
   async createTempDir() {
-    const tempDir = path.join(os.tmpdir(), 'bgtm-test-' + Math.random().toString(36).substr(2, 9))
+    const tempDir = path.join(os.tmpdir(), 'bg-tm-test-' + Math.random().toString(36).substr(2, 9))
     await fs.mkdir(tempDir, { recursive: true })
     return tempDir
   },

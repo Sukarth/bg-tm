@@ -1,18 +1,18 @@
 {
-  "name": "bgtm",
+  "name": "bg-tm",
   "version": "1.0.0",
   "description": "Background Task Manager - A cross-platform CLI tool for managing background processes",
   "main": "src/index.js",
   "bin": {
-    "bgtm": "./bin/bgtm"
+    "bg-tm": "./bin/bg-tm"
   },
   "scripts": {
-    "start": "node bin/bgtm",
+    "start": "node bin/bg-tm",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src/ test/ bin/bgtm",
-    "lint:fix": "eslint src/ test/ bin/bgtm --fix",
+    "lint": "eslint src/ test/ bin/bg-tm",
+    "lint:fix": "eslint src/ test/ bin/bg-tm --fix",
     "prepare": "npm run test && npm run lint"
   },
   "keywords": [
@@ -26,13 +26,13 @@
   ],
   "author": "Sukarth Acharya",
   "license": "MIT",
-  "homepage": "https://github.com/Sukarth/bgtm#readme",
+  "homepage": "https://github.com/Sukarth/bg-tm#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sukarth/bgtm.git"
+    "url": "git+https://github.com/Sukarth/bg-tm.git"
   },
   "bugs": {
-    "url": "https://github.com/Sukarth/bgtm/issues"
+    "url": "https://github.com/Sukarth/bg-tm/issues"
   },
   "engines": {
     "node": ">=14.0.0"

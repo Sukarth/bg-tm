@@ -1,5 +1,5 @@
 /**
- * BGTM - Background Task Manager
+ * BG-TM - Background Task Manager
  * Main entry point for the library
  *
  * @author Sukarth Acharya

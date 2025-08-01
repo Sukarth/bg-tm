@@ -1,6 +1,6 @@
-# Contributing to BGTM
+# Contributing to BG-TM
 
-We love your input! We want to make contributing to BGTM as easy and transparent as possible, whether it's:
+We love your input! We want to make contributing to BG-TM as easy and transparent as possible, whether it's:
 
 - Reporting a bug
 - Discussing the current state of the code
@@ -27,8 +27,8 @@ Pull requests are the best way to propose changes to the codebase. We actively w
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Sukarth/bgtm.git
-   cd bgtm
+   git clone https://github.com/Sukarth/bg-tm.git
+   cd bg-tm
    ```
 
 2. **Install dependencies**
@@ -106,7 +106,7 @@ test: add tests for autostart manager
 
 ## Bug Reports
 
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/Sukarth/bgtm/issues/new).
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/Sukarth/bg-tm/issues/new).
 
 **Great Bug Reports** tend to have:
 
@@ -135,7 +135,7 @@ A clear and concise description of what you expected to happen.
 **Environment:**
 - OS: [e.g. Windows 10, macOS 11.2, Ubuntu 20.04]
 - Node.js version: [e.g. 16.14.0]
-- BGTM version: [e.g. 1.0.0]
+- BG-TM version: [e.g. 1.0.0]
 
 **Additional context**
 Add any other context about the problem here.
@@ -143,7 +143,7 @@ Add any other context about the problem here.
 
 ## Feature Requests
 
-We welcome feature requests! Please [open an issue](https://github.com/Sukarth/bgtm/issues/new) with:
+We welcome feature requests! Please [open an issue](https://github.com/Sukarth/bg-tm/issues/new) with:
 
 - A clear description of the feature
 - Use cases and examples
@@ -155,8 +155,8 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ## Questions?
 
-Feel free to [open an issue](https://github.com/Sukarth/bgtm/issues/new) if you have questions about contributing.
+Feel free to [open an issue](https://github.com/Sukarth/bg-tm/issues/new) if you have questions about contributing.
 
 ---
 
-Thank you for contributing to BGTM! 🎉
+Thank you for contributing to BG-TM! 🎉

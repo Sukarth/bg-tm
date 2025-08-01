@@ -20,8 +20,8 @@ class Storage {
      */
   getDataDir() {
     // Allow override for testing
-    if (process.env.BGTM_DATA_DIR) {
-      return process.env.BGTM_DATA_DIR
+    if (process.env.BG_TM_DATA_DIR) {
+      return process.env.BG_TM_DATA_DIR
     }
 
     const homeDir = os.homedir()
@@ -29,13 +29,13 @@ class Storage {
 
     switch (os.platform()) {
       case 'win32':
-        dataDir = path.join(homeDir, 'AppData', 'Local', 'bgtm')
+        dataDir = path.join(homeDir, 'AppData', 'Local', 'bg-tm')
         break
       case 'darwin':
-        dataDir = path.join(homeDir, 'Library', 'Application Support', 'bgtm')
+        dataDir = path.join(homeDir, 'Library', 'Application Support', 'bg-tm')
         break
       default:
-        dataDir = path.join(homeDir, '.bgtm')
+        dataDir = path.join(homeDir, '.bg-tm')
         break
     }
 

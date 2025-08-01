@@ -420,7 +420,7 @@ describe('CLI', () => {
 
   describe('run method', () => {
     test('should parse and execute commands', async() => {
-      const argv = ['node', 'bgtm', 'list']
+      const argv = ['node', 'bg-tm', 'list']
 
       // Mock program.parseAsync
       jest.spyOn(cli.program, 'parseAsync').mockResolvedValue()
@@ -431,7 +431,7 @@ describe('CLI', () => {
     })
 
     test('should handle parsing errors', async() => {
-      const argv = ['node', 'bgtm', 'invalid-command']
+      const argv = ['node', 'bg-tm', 'invalid-command']
       const error = new Error('Unknown command')
 
       jest.spyOn(cli.program, 'parseAsync').mockRejectedValue(error)
@@ -454,7 +454,7 @@ describe('CLI', () => {
       })
 
       // Execute the run command through the program
-      await cli.program.parseAsync(['node', 'bgtm', 'run', 'echo "test"', '--name', 'test-process'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'run', 'echo "test"', '--name', 'test-process'])
 
       expect(mockProcessManager.startProcess).toHaveBeenCalled()
     })
@@ -463,7 +463,7 @@ describe('CLI', () => {
       mockProcessManager.listProcesses.mockResolvedValue([])
 
       // Execute the list command through the program
-      await cli.program.parseAsync(['node', 'bgtm', 'list'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'list'])
 
       expect(mockProcessManager.listProcesses).toHaveBeenCalled()
     })
@@ -472,7 +472,7 @@ describe('CLI', () => {
       mockProcessManager.stopProcess.mockResolvedValue()
 
       // Execute the stop command through the program
-      await cli.program.parseAsync(['node', 'bgtm', 'stop', 'test-process'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'stop', 'test-process'])
 
       expect(mockProcessManager.stopProcess).toHaveBeenCalledWith('test-process', undefined)
     })
@@ -481,7 +481,7 @@ describe('CLI', () => {
       mockProcessManager.getLogs.mockResolvedValue('test logs')
 
       // Execute the logs command through the program
-      await cli.program.parseAsync(['node', 'bgtm', 'logs', 'test-process'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'logs', 'test-process'])
 
       expect(mockProcessManager.getLogs).toHaveBeenCalled()
     })
@@ -494,7 +494,7 @@ describe('CLI', () => {
       })
 
       // Execute the status command through the program
-      await cli.program.parseAsync(['node', 'bgtm', 'status', 'test-process'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'status', 'test-process'])
 
       expect(mockProcessManager.getProcess).toHaveBeenCalledWith('test-process')
     })
@@ -507,7 +507,7 @@ describe('CLI', () => {
       })
 
       // Execute the restart command through the program
-      await cli.program.parseAsync(['node', 'bgtm', 'restart', 'test-process'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'restart', 'test-process'])
 
       expect(mockProcessManager.restartProcess).toHaveBeenCalledWith('test-process')
     })
@@ -516,7 +516,7 @@ describe('CLI', () => {
       mockProcessManager.cleanup.mockResolvedValue({ processes: 2, logFiles: 1 })
 
       // Execute the cleanup command through the program
-      await cli.program.parseAsync(['node', 'bgtm', 'cleanup', '--force'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'cleanup', '--force'])
 
       expect(mockProcessManager.cleanup).toHaveBeenCalled()
     })
@@ -525,7 +525,7 @@ describe('CLI', () => {
       mockProcessManager.listProcesses.mockRejectedValue(new Error('Database error'))
 
       // Execute command that will fail
-      await cli.program.parseAsync(['node', 'bgtm', 'list'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'list'])
 
       expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Database error'))
       expect(processExitSpy).toHaveBeenCalledWith(1)
@@ -542,7 +542,7 @@ describe('CLI', () => {
       mockAutoStartManager.addToAutoStart.mockResolvedValue()
 
       // Execute the run command with autostart
-      await cli.program.parseAsync(['node', 'bgtm', 'run', 'echo "test"', '--name', 'test-process', '--autostart'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'run', 'echo "test"', '--name', 'test-process', '--autostart'])
 
       expect(mockProcessManager.startProcess).toHaveBeenCalled()
       expect(mockAutoStartManager.addToAutoStart).toHaveBeenCalled()
@@ -559,7 +559,7 @@ describe('CLI', () => {
 
       // Execute the run command with environment variables
       await cli.program.parseAsync([
-        'node', 'bgtm', 'run', 'node server.js',
+        'node', 'bg-tm', 'run', 'node server.js',
         '--name', 'test-process',
         '--env', 'NODE_ENV=production',
         '--env', 'PORT=3000'
@@ -574,7 +574,7 @@ describe('CLI', () => {
       mockProcessManager.stopProcess.mockResolvedValue()
 
       // Execute the stop command with force
-      await cli.program.parseAsync(['node', 'bgtm', 'stop', 'test-process', '--force'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'stop', 'test-process', '--force'])
 
       expect(mockProcessManager.stopProcess).toHaveBeenCalledWith('test-process', true)
     })
@@ -583,7 +583,7 @@ describe('CLI', () => {
       mockProcessManager.getLogs.mockResolvedValue('test logs')
 
       // Execute the logs command with tail
-      await cli.program.parseAsync(['node', 'bgtm', 'logs', 'test-process', '--tail', '100'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'logs', 'test-process', '--tail', '100'])
 
       expect(mockProcessManager.getLogs).toHaveBeenCalledWith('test-process', expect.objectContaining({
         tail: 100
@@ -595,7 +595,7 @@ describe('CLI', () => {
       mockProcessManager.getLogs.mockResolvedValue(mockLogStream)
 
       // Execute the logs command with follow
-      await cli.program.parseAsync(['node', 'bgtm', 'logs', 'test-process', '--follow'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'logs', 'test-process', '--follow'])
 
       expect(mockProcessManager.getLogs).toHaveBeenCalledWith('test-process', expect.objectContaining({
         follow: true
@@ -606,7 +606,7 @@ describe('CLI', () => {
       mockProcessManager.listProcesses.mockResolvedValue([])
 
       // Execute the list command with --all
-      await cli.program.parseAsync(['node', 'bgtm', 'list', '--all'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'list', '--all'])
 
       expect(mockProcessManager.listProcesses).toHaveBeenCalledWith(true)
     })
@@ -615,7 +615,7 @@ describe('CLI', () => {
       mockProcessManager.listProcesses.mockResolvedValue([])
 
       // Execute the list command with --json
-      await cli.program.parseAsync(['node', 'bgtm', 'list', '--json'])
+      await cli.program.parseAsync(['node', 'bg-tm', 'list', '--json'])
 
       expect(mockProcessManager.listProcesses).toHaveBeenCalled()
     })

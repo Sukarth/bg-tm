@@ -19,13 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Comprehensive Logging**: Capture and view stdout/stderr with tail and follow options
 
 #### CLI Commands
-- `bgtm run <command>` - Start commands in the background
-- `bgtm list` - List all background processes with status
-- `bgtm stop <names...>` - Stop one or more processes
-- `bgtm logs <name>` - View process logs with tail and follow options
-- `bgtm status <name>` - Show detailed process information
-- `bgtm restart <name>` - Restart a background process
-- `bgtm cleanup` - Remove stopped processes and clean log files
+- `bg-tm run <command>` - Start commands in the background
+- `bg-tm list` - List all background processes with status
+- `bg-tm stop <names...>` - Stop one or more processes
+- `bg-tm logs <name>` - View process logs with tail and follow options
+- `bg-tm status <name>` - Show detailed process information
+- `bg-tm restart <name>` - Restart a background process
+- `bg-tm cleanup` - Remove stopped processes and clean log files
 
 #### Advanced Features
 - **Autostart on Boot**: Configure processes to start automatically on system reboot
@@ -43,7 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **ESLint Configuration**: Code quality and consistency
 - **Cross-Platform Testing**: Automated testing on multiple platforms
 - **Production Ready**: Proper error handling and edge case management
-- **API Library**: Use BGTM as a Node.js library in other projects
+- **API Library**: Use BG-TM as a Node.js library in other projects
 
 #### Documentation
 - **Complete README**: Installation, usage, and examples
@@ -101,4 +101,4 @@ While version 1.0.0 is feature-complete for the initial scope, potential future 
 
 ---
 
-For more information about this release, see the [README.md](README.md) and [documentation](https://github.com/Sukarth/bgtm/wiki).
+For more information about this release, see the [README.md](README.md) and [documentation](https://github.com/Sukarth/bg-tm/wiki).

@@ -13,7 +13,7 @@ describe('Storage', () => {
 
   beforeEach(async() => {
     tempDir = await global.testUtils.createTempDir()
-    process.env.BGTM_DATA_DIR = tempDir
+    process.env.BG_TM_DATA_DIR = tempDir
     storage = new Storage()
     await storage.init()
   })
@@ -29,19 +29,19 @@ describe('Storage', () => {
     })
 
     test('should get platform-specific data directory when no override', () => {
-      delete process.env.BGTM_DATA_DIR
+      delete process.env.BG_TM_DATA_DIR
       const newStorage = new Storage()
       const homeDir = os.homedir()
 
       switch (os.platform()) {
         case 'win32':
-          expect(newStorage.dataDir).toBe(path.join(homeDir, 'AppData', 'Local', 'bgtm'))
+          expect(newStorage.dataDir).toBe(path.join(homeDir, 'AppData', 'Local', 'bg-tm'))
           break
         case 'darwin':
-          expect(newStorage.dataDir).toBe(path.join(homeDir, 'Library', 'Application Support', 'bgtm'))
+          expect(newStorage.dataDir).toBe(path.join(homeDir, 'Library', 'Application Support', 'bg-tm'))
           break
         default:
-          expect(newStorage.dataDir).toBe(path.join(homeDir, '.bgtm'))
+          expect(newStorage.dataDir).toBe(path.join(homeDir, '.bg-tm'))
           break
       }
     })

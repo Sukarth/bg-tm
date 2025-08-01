@@ -1,8 +1,8 @@
-# BGTM - Background Task Manager
+# BG-TM - Background Task Manager
 
-[![npm version](https://badge.fury.io/js/bgtm.svg)](https://badge.fury.io/js/bgtm)
+[![npm version](https://badge.fury.io/js/bg-tm.svg)](https://badge.fury.io/js/bg-tm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js CI](https://github.com/Sukarth/bgtm/workflows/Node.js%20CI/badge.svg)](https://github.com/Sukarth/bgtm/actions)
+[![Node.js CI](https://github.com/Sukarth/bg-tm/workflows/Node.js%20CI/badge.svg)](https://github.com/Sukarth/bg-tm/actions)
 
 A powerful, cross-platform CLI tool for managing background processes. Run any command in the background, manage process lifecycle, view logs, and configure autostart - all from the command line.
 
@@ -22,29 +22,29 @@ A powerful, cross-platform CLI tool for managing background processes. Run any c
 Install globally via npm:
 
 ```bash
-npm install -g bgtm
+npm install -g bg-tm
 ```
 
 Or run directly with npx:
 
 ```bash
-npx bgtm --help
+npx bg-tm --help
 ```
 
 ## Quick Start
 
 ```bash
 # Start a web server in the background
-bgtm run "python -m http.server 8000" --name webserver
+bg-tm run "python -m http.server 8000" --name webserver
 
 # List all running processes
-bgtm list
+bg-tm list
 
 # View logs
-bgtm logs webserver
+bg-tm logs webserver
 
 # Stop the process
-bgtm stop webserver
+bg-tm stop webserver
 ```
 
 ## Usage
@@ -53,74 +53,74 @@ bgtm stop webserver
 
 ```bash
 # Basic usage
-bgtm run "your-command-here"
+bg-tm run "your-command-here"
 
 # With custom name
-bgtm run "npm start" --name myapp
+bg-tm run "npm start" --name myapp
 
 # With autostart enabled
-bgtm run "node server.js" --name api-server --autostart
+bg-tm run "node server.js" --name api-server --autostart
 
 # With custom working directory
-bgtm run "npm run dev" --name frontend --directory /path/to/project
+bg-tm run "npm run dev" --name frontend --directory /path/to/project
 
 # With environment variables
-bgtm run "node app.js" --name backend --env NODE_ENV=production --env PORT=3000
+bg-tm run "node app.js" --name backend --env NODE_ENV=production --env PORT=3000
 ```
 
 ### Managing Processes
 
 ```bash
 # List running processes
-bgtm list
+bg-tm list
 
 # List all processes (including stopped)
-bgtm list --all
+bg-tm list --all
 
 # Get JSON output
-bgtm list --json
+bg-tm list --json
 
 # Show detailed status
-bgtm status myapp
+bg-tm status myapp
 
 # Stop processes
-bgtm stop myapp
-bgtm stop process1 process2 process3
+bg-tm stop myapp
+bg-tm stop process1 process2 process3
 
 # Force stop
-bgtm stop myapp --force
+bg-tm stop myapp --force
 
 # Restart a process
-bgtm restart myapp
+bg-tm restart myapp
 ```
 
 ### Viewing Logs
 
 ```bash
 # View last 150 lines (default)
-bgtm logs myapp
+bg-tm logs myapp
 
 # View last N (200) lines
-bgtm logs myapp --tail 200
+bg-tm logs myapp --tail 200
 
 # Follow logs in real-time
-bgtm logs myapp --follow
+bg-tm logs myapp --follow
 ```
 
 ### Maintenance
 
 ```bash
 # Clean up stopped processes
-bgtm cleanup --force
+bg-tm cleanup --force
 
 # Version and help
-bgtm --version
-bgtm --help
+bg-tm --version
+bg-tm --help
 ```
 
 ## Command Reference
 
-### `bgtm run <command> [options]`
+### `bg-tm run <command> [options]`
 
 Start a command in the background.
 
@@ -133,7 +133,7 @@ Start a command in the background.
 - `-d, --directory <dir>` - Working directory for the command
 - `-e, --env <key=value>` - Environment variables (can be used multiple times)
 
-### `bgtm list [options]`
+### `bg-tm list [options]`
 
 List background processes.
 
@@ -141,7 +141,7 @@ List background processes.
 - `-a, --all` - Show all processes including stopped ones
 - `-j, --json` - Output in JSON format
 
-### `bgtm stop <names...> [options]`
+### `bg-tm stop <names...> [options]`
 
 Stop background processes.
 
@@ -151,7 +151,7 @@ Stop background processes.
 **Options:**
 - `-f, --force` - Force stop processes
 
-### `bgtm logs <name> [options]`
+### `bg-tm logs <name> [options]`
 
 View logs of a background process.
 
@@ -162,21 +162,21 @@ View logs of a background process.
 - `-t, --tail <lines>` - Number of lines to show from the end (default: 150)
 - `-f, --follow` - Follow log output
 
-### `bgtm status <name>`
+### `bg-tm status <name>`
 
 Show detailed status of a process.
 
 **Arguments:**
 - `<name>` - Process name or ID
 
-### `bgtm restart <name>`
+### `bg-tm restart <name>`
 
 Restart a background process.
 
 **Arguments:**
 - `<name>` - Process name or ID
 
-### `bgtm cleanup [options]`
+### `bg-tm cleanup [options]`
 
 Clean up stopped processes and log files.
 
@@ -185,11 +185,11 @@ Clean up stopped processes and log files.
 
 ## Process Storage
 
-BGTM stores process metadata in your home directory:
+BG-TM stores process metadata in your home directory:
 
-- **Windows**: `%APPDATA%\Local\bgtm\`
-- **macOS**: `~/Library/Application Support/bgtm/`
-- **Linux**: `~/.bgtm/`
+- **Windows**: `%APPDATA%\Local\bg-tm\`
+- **macOS**: `~/Library/Application Support/bg-tm/`
+- **Linux**: `~/.bg-tm/`
 
 The storage includes:
 - `processes.json` - Process metadata
@@ -197,7 +197,7 @@ The storage includes:
 
 ## Autostart Configuration
 
-When you enable autostart with the `--autostart` flag, BGTM configures the process to start automatically on system boot using platform-native methods:
+When you enable autostart with the `--autostart` flag, BG-TM configures the process to start automatically on system boot using platform-native methods:
 
 - **Windows**: Task Scheduler
 - **macOS**: Launch Agents
@@ -209,49 +209,49 @@ When you enable autostart with the `--autostart` flag, BGTM configures the proce
 
 ```bash
 # Start a development server
-bgtm run "npm run dev" --name dev-server --directory /path/to/project
+bg-tm run "npm run dev" --name dev-server --directory /path/to/project
 
 # Start a database
-bgtm run "mongod --dbpath ./data" --name mongodb --autostart
+bg-tm run "mongod --dbpath ./data" --name mongodb --autostart
 
 # Start multiple microservices
-bgtm run "node auth-service.js" --name auth --env PORT=3001
-bgtm run "node api-service.js" --name api --env PORT=3002
-bgtm run "node web-service.js" --name web --env PORT=3000
+bg-tm run "node auth-service.js" --name auth --env PORT=3001
+bg-tm run "node api-service.js" --name api --env PORT=3002
+bg-tm run "node web-service.js" --name web --env PORT=3000
 ```
 
 ### System Administration
 
 ```bash
 # Monitor log files
-bgtm run "tail -f /var/log/system.log" --name syslog-monitor
+bg-tm run "tail -f /var/log/system.log" --name syslog-monitor
 
 # Regular backup task
-bgtm run "rsync -av /home/user/docs/ /backup/docs/" --name backup --autostart
+bg-tm run "rsync -av /home/user/docs/ /backup/docs/" --name backup --autostart
 
 # Network monitoring
-bgtm run "ping -i 60 google.com" --name network-check
+bg-tm run "ping -i 60 google.com" --name network-check
 ```
 
 ### Data Processing
 
 ```bash
 # Long-running data processing
-bgtm run "python process_data.py --input large_dataset.csv" --name data-processor
+bg-tm run "python process_data.py --input large_dataset.csv" --name data-processor
 
 # Machine learning training
-bgtm run "python train_model.py --epochs 1000" --name ml-training
+bg-tm run "python train_model.py --epochs 1000" --name ml-training
 
 # ETL pipeline
-bgtm run "python etl_pipeline.py" --name etl --autostart --env BATCH_SIZE=1000
+bg-tm run "python etl_pipeline.py" --name etl --autostart --env BATCH_SIZE=1000
 ```
 
 ## API
 
-BGTM can also be used as a Node.js library:
+BG-TM can also be used as a Node.js library:
 
 ```javascript
-const { ProcessManager, Storage } = require('bgtm')
+const { ProcessManager, Storage } = require('bg-tm')
 
 const processManager = new ProcessManager()
 
@@ -276,8 +276,8 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 
 ```bash
 # Clone the repository
-git clone https://github.com/Sukarth/bgtm.git
-cd bgtm
+git clone https://github.com/Sukarth/bg-tm.git
+cd bg-tm
 
 # Install dependencies
 npm install
@@ -322,8 +322,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Sukarth/bgtm/issues)
-- 💡 **Feature Requests**: [GitHub Issues](https://github.com/Sukarth/bgtm/issues)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Sukarth/bg-tm/issues)
+- 💡 **Feature Requests**: [GitHub Issues](https://github.com/Sukarth/bg-tm/issues)
 
 ---
 

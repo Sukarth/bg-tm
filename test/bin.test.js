@@ -5,8 +5,8 @@
 const { spawn } = require('child_process')
 const path = require('path')
 
-describe('bin/bgtm', () => {
-  const binPath = path.join(__dirname, '..', 'bin', 'bgtm')
+describe('bin/bg-tm', () => {
+  const binPath = path.join(__dirname, '..', 'bin', 'bg-tm')
 
   test('should show help when no arguments provided', (done) => {
     const child = spawn('node', [binPath, '--help'], {

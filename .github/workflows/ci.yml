@@ -59,24 +59,24 @@ jobs:
       run: npm install -g .
 
     - name: Test CLI installation
-      run: bgtm --version
+      run: bg-tm --version
 
     - name: Test basic functionality (Unix)
       if: runner.os != 'Windows'
       run: |
-        bgtm run "echo 'test process'" --name test-ci
+        bg-tm run "echo 'test process'" --name test-ci
         sleep 3
-        bgtm list
-        bgtm stop test-ci || true
+        bg-tm list
+        bg-tm stop test-ci || true
 
     - name: Test basic functionality (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
       run: |
-        bgtm run "echo test process" --name test-ci
+        bg-tm run "echo test process" --name test-ci
         Start-Sleep -Seconds 3
-        bgtm list
-        bgtm stop test-ci
+        bg-tm list
+        bg-tm stop test-ci
 
   security-audit:
     runs-on: ubuntu-latest
